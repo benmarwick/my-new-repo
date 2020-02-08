@@ -1,0 +1,19 @@
+# This is the parent document
+
+Here are all the contents of the child document
+
+```{r all-from-child, child='child-doc.Rmd'}
+```
+
+Here is the output from just one code block in the child document, using `ref.label` (this can be used to refenence blocks with a single document also)
+
+```{r one-chunk-from-child, ref.label='show-the-date', echo=FALSE}
+```
+
+# Conclusion
+
+We can embed the output from one Rmd in the middle of another Rmd. 
+
+Child documents are executed in the same environment as the parent document. 
+
+This is handy for doing things like looping over a child document multiple times and running it with different inputs.

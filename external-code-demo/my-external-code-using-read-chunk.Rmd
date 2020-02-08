@@ -1,0 +1,39 @@
+--- 
+title: "Example of Using External Code with knitr::read_chunk" 
+author: "[Ben Marwick](http://faculty.washington.edu/bmarwick/)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: bookdown::html_document2
+--- 
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(echo = TRUE) 
+``` 
+
+This code chunk reads the code in the external file, but does not execute it.
+
+```{r}
+knitr::read_chunk("my-external-code.R") 
+```
+
+This code chunk prints the externally located code, 
+but it does not execute the code. We put the script code section heading `set-up-the-data` in the code block label here.
+
+```{r set-up-the-data, eval = FALSE} 
+
+``` 
+
+The next code chunk executes two sections of the externally located code, but it does not print code itself. We can invoke multiple sections of code in our script file with `<<set-up-the-data>>` and `<<print-the-data>>`, rather than in the code block label (note that we cannot have duplicate code block labels in our Rmd). 
+
+```{r set-up-and-and-print-the-data, echo=FALSE} 
+<<set-up-the-data>>
+<<print-the-data>>
+``` 
+
+The next code chunk executes the section of the externally located code that draws a plot, but it does not print code itself:
+
+```{r plot-the-data, echo = FALSE} 
+
+``` 
+
+
+

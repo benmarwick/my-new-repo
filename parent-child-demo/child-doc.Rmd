@@ -1,0 +1,14 @@
+# This is the child document
+
+Hi, there. I'm a child with a plot
+
+```{r child-plot}
+plot(trees)
+```
+
+Here's a code block that we can refer to specifically in the parent document.
+
+```{r show-the-date}
+Sys.Date()
+```
+

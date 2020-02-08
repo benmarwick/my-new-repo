@@ -1,0 +1,29 @@
+---
+title: "Example of global cache settings"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(autodep = TRUE,           # let knitr sort it out!
+                      cache.comments = FALSE,   # ignore changes to comments
+                      cache.extra= list(R.version,  # Discard cache if the R environment changes
+                                        sessionInfo(),
+                                        tools::md5sum('my-precious.csv') # discard cache if data file changes
+                                         )
+                      
+                      )   
+knitr::dep_auto()
+```
+
+Or if we prefer to cache objects by ourselves, without using knitr, we can do something like this
+
+```{r}
+if (file.exists("results.rds")) {
+  res <- readRDS("results.rds")
+} else {
+  res <- compute_it()  # a time-consuming function
+  saveRDS(res, "results.rds")
+}
+```
+
+The one and only way to invalidate the cache in this case is to manually delete results.rds.

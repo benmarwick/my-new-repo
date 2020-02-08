@@ -1,0 +1,30 @@
+---
+title: My Document
+output: html_document
+params:
+  year: 2018
+  region: Europe
+  data: file.csv
+  printcode: TRUE
+  date: !r lubridate::today()
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(echo = params$printcode)
+```
+
+```{r}
+
+my_data <- readr::read_csv(params$data)
+
+library(dplyr)
+
+how_many_people <- 
+  my_data %>% 
+  filter(region_column == params$region,
+         year_column == params$year) %>% 
+  pull(population)
+```
+
+
+In `r params$year` there were `r how_many_people` people living in `r params$region`   

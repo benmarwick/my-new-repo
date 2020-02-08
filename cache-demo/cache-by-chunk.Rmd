@@ -1,0 +1,23 @@
+---
+title: "Examples of using the cache"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r import-data, cache=TRUE, cache.extra=tools::md5sum('my-precious.csv')}
+d <-  read.csv('my-precious.csv')
+```
+
+```{r long-running-code, cache=TRUE}
+results <- very_time_consuming_function(d)
+```
+
+```{r dependson="long-running-code", cache=TRUE}
+more_results <- quick_function(results)
+plot(more_results)
+```
+
+
